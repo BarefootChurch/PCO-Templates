@@ -1,0 +1,104 @@
+<html>
+<head>
+  <title>Service Flow: {{ plan.dates }}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+  <style>
+    table {
+      border: 2px solid black;
+      font-size: 16px;
+      width: 70%;
+    }
+    th {
+      background: black;
+      color: white;
+      font-weight: normal;
+      line-height: 1.4em;
+      padding: 7px 5px;
+      text-align: center;
+    }
+    td {
+      border: 1px solid black;
+      padding: 10px 5px;
+    }
+    td.header {
+      background: #999;
+      border-left: 0;
+      border-right: 0;
+      color: white;
+      padding: 5px;
+      text-align: center;
+    }
+    td.message {
+      background: #de0;
+    }
+    
+    /* Pretty paper look */
+    body {
+      background: rgb(204,204,204); 
+    }
+    .page {
+      background: white;
+      box-shadow: 0 0 0.2in rgba(0,0,0,0.5);
+      display: block;
+      height: 11in;
+      margin: 0 auto;
+      margin-bottom: 0.2in;
+      padding: 0.3in;
+      width: 8.5in;
+    }
+    @media print {
+      body, .page {
+        background: white;
+        box-shadow: 0;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    
+    <table>
+      <tr>
+        <th>
+          <small>**VERSION {% for note in plan.notes %}{% if note.category_name == "Information" %}{{note.note | uppercase}}{% endif %}{% endfor %}**</small>
+          <br>
+          <b>{% if plan.plan_title != "" %}{{ plan.plan_title }} - {% endif %}{{ plan.dates }}</b>
+        </th>
+      </tr>
+      {% for item in plan.items %}
+      {% if item.is_preservice or item.is_postservice %}
+      {% else %}
+        <tr>
+        {% case item.item_type %}
+        {% when 'Header' %}
+          {% if item.title contains "Pre" or item.title contains "Post" %}
+          {% else %}
+          <td class="header">{{ item.title }}</td>
+          {% endif %}
+        {% when 'Song' %}
+          <td>SONG: "{{ item.title }}"</td>            
+        {% else %}
+          <td{% if item.title == "Message" %} class="message"{% endif %}>
+            {% if item.title contains "VIDEO:" %}
+              {{ item.length }}s 
+            {% endif %}
+            <b>{{ item.title }}</b>
+            <br>
+            {{ item.description }}
+          </td>
+        {% endcase %}
+        </tr>
+      {% endif %}
+      {% endfor %}
+      <tr>
+        <th>{{ plan.total_length }}s TOTAL TIME</th>
+      </tr>
+    </table>
+    
+  </div>
+</body>
+</html>

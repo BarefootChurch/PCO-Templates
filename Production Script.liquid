@@ -70,7 +70,7 @@
   <div class="page">
     
     <header>
-      **VERSION {% for note in plan.notes %}{% if note.category_name == "Information" %}{{note.note | uppercase}}{% endif %}{% endfor %}**</small>
+      **VERSION {% for note in plan.notes %}{% if note.category_name == "Information" %}{{note.note | upcase }}{% endif %}{% endfor %}**</small>
       <br>
       <b>PRODUCTION SCRIPT:{% if plan.plan_title != "" %} {{ plan.plan_title }} - {% endif %} {{ plan.dates }}</b>
     </header>

@@ -80,15 +80,13 @@
         </th>
       </tr>
         {% for item in plan.items %}
-          {% if item.is_preservice or item.is_postservice %}
-          {% else %}
+          {% unless item.is_preservice or item.is_postservice %}
             <tr>
             {% case item.item_type %}
               {% when 'Header' %}
-                {% if item.title contains "Pre" or item.title contains "Post" %}
-                {% else %}
+                {% unless item.title contains "Pre" or item.title contains "Post" %}
                   <td class="header">{{ item.title }}</td>
-                {% endif %}
+                {% endunless %}
               {% when 'Song' %}
                 <td>SONG: "{{ item.title }}"</td>            
               {% else %}
@@ -102,7 +100,7 @@
                 </td>
             {% endcase %}
             </tr>
-          {% endif %}
+          {% endunless %}
         {% endfor %}
       <tr>
         <th>{{ plan.total_length }}s TOTAL TIME</th>

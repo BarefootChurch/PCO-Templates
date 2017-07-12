@@ -65,45 +65,45 @@
       <tr>
         <th>
           <small>
-          {% for note in plan.notes %}
-          {% if note.category_name == "Information" %}
-          {% if note.note == "NONE" %}
-            **PLAN IS UNFINALIZED**
-          {% else %}
-            **VERSION {{ note.note | upcase }}**
-          {% endif %}
-          {% endif %}
-          {% endfor %}
+            {% for note in plan.notes %}
+              {% if note.category_name == "Information" %}
+                {% if note.note == "NONE" %}
+                  **PLAN IS UNFINALIZED**
+                {% else %}
+                  **VERSION {{ note.note | upcase }}**
+                {% endif %}
+              {% endif %}
+            {% endfor %}
           </small>
           <br>
           <b>{% if plan.plan_title != "" %}{{ plan.plan_title }} - {% endif %}{{ plan.dates }}</b>
         </th>
       </tr>
-      {% for item in plan.items %}
-      {% if item.is_preservice or item.is_postservice %}
-      {% else %}
-        <tr>
-        {% case item.item_type %}
-        {% when 'Header' %}
-          {% if item.title contains "Pre" or item.title contains "Post" %}
+        {% for item in plan.items %}
+          {% if item.is_preservice or item.is_postservice %}
           {% else %}
-          <td class="header">{{ item.title }}</td>
+            <tr>
+            {% case item.item_type %}
+              {% when 'Header' %}
+                {% if item.title contains "Pre" or item.title contains "Post" %}
+                {% else %}
+                  <td class="header">{{ item.title }}</td>
+                {% endif %}
+              {% when 'Song' %}
+                <td>SONG: "{{ item.title }}"</td>            
+              {% else %}
+                <td{% if item.title == "Message" %} class="message"{% endif %}>
+                  {% if item.title contains "VIDEO:" %}
+                    {{ item.length }}s 
+                  {% endif %}
+                  <b>{{ item.title }}</b>
+                  <br>
+                  {{ item.description }}
+                </td>
+            {% endcase %}
+            </tr>
           {% endif %}
-        {% when 'Song' %}
-          <td>SONG: "{{ item.title }}"</td>            
-        {% else %}
-          <td{% if item.title == "Message" %} class="message"{% endif %}>
-            {% if item.title contains "VIDEO:" %}
-              {{ item.length }}s 
-            {% endif %}
-            <b>{{ item.title }}</b>
-            <br>
-            {{ item.description }}
-          </td>
-        {% endcase %}
-        </tr>
-      {% endif %}
-      {% endfor %}
+        {% endfor %}
       <tr>
         <th>{{ plan.total_length }}s TOTAL TIME</th>
       </tr>

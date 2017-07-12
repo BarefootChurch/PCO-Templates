@@ -71,15 +71,15 @@
     
     <header>
       <small>
-      {% for note in plan.notes %}
-      {% if note.category_name == "Information" %}
-      {% if note.note == "NONE" %}
-        **PLAN IS UNFINALIZED**
-      {% else %}
-        **VERSION {{ note.note | upcase }}**
-      {% endif %}
-      {% endif %}
-      {% endfor %}
+        {% for note in plan.notes %}
+          {% if note.category_name == "Information" %}
+            {% if note.note == "NONE" %}
+              **PLAN IS UNFINALIZED**
+            {% else %}
+              **VERSION {{ note.note | upcase }}**
+            {% endif %}
+          {% endif %}
+        {% endfor %}
       </small>
       <br>
       <b>PRODUCTION SCRIPT:{% if plan.plan_title != "" %} {{ plan.plan_title }} - {% endif %} {{ plan.dates }}</b>
@@ -99,27 +99,27 @@
       <tbody>
         {% for item in plan.items %}
           <tr>
-          {% case item.item_type %}
-          {% when 'Header' %}
-            <td colspan="2" class="header"></td>
-            <td class="header">{{ item.title }}</td>
-            <td colspan="3" class="header"></td>
-          {% else %}
-            <td>{{item.offset}}</td>
-            <td>{{ item.length }}</td>
-            <td style="text-align: left">
-              <b>{{ item.title }}</b>
-              <br>
-              {{ item.description }}
-              {% if item.details != "" %}
-              <hr>
-              {{ item.details }}
-              {% endif %%}
-            </td>
-            <td>{% for note in item.notes %}{% if note.category_name == "Side Screens" %}{{ note.note }}{% endif %}{% endfor %}</td>
-            <td>{% for note in item.notes %}{% if note.category_name == "Center Screen" %}{{ note.note }}{% endif %}{% endfor %}</td>
-            <td>{% for note in item.notes %}{% if note.category_name == "Ableton" %}{{ note.note }}{% endif %}{% endfor %}</td>
-          {% endcase %}
+            {% case item.item_type %}
+              {% when 'Header' %}
+                <td colspan="2" class="header"></td>
+                <td class="header">{{ item.title }}</td>
+                <td colspan="3" class="header"></td>
+              {% else %}
+                <td>{{item.offset}}</td>
+                <td>{{ item.length }}</td>
+                <td style="text-align: left">
+                  <b>{{ item.title }}</b>
+                  <br>
+                  {{ item.description }}
+                  {% if item.details != "" %}
+                    <hr>
+                    {{ item.details }}
+                  {% endif %%}
+                </td>
+                <td>{% for note in item.notes %}{% if note.category_name == "Side Screens" %}{{ note.note }}{% endif %}{% endfor %}</td>
+                <td>{% for note in item.notes %}{% if note.category_name == "Center Screen" %}{{ note.note }}{% endif %}{% endfor %}</td>
+                <td>{% for note in item.notes %}{% if note.category_name == "Ableton" %}{{ note.note }}{% endif %}{% endfor %}</td>
+            {% endcase %}
           </tr>
         {% endfor %}
       </tbody>

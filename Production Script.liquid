@@ -107,7 +107,7 @@
           <th width="45%" style="text-align: left">Element</th>
           <th width="15%">Side Screens</th>
           <th width="15%">Center Screen</th>
-          <th width="15%">Ableton</th>
+          <th width="15%">Other</th>
         </tr>
       </thead>
       <tbody>
@@ -132,7 +132,7 @@
                 </td>
                 <td>{% for note in item.notes %}{% if note.category_name == "Side Screens" %}{{ note.note }}{% endif %}{% endfor %}</td>
                 <td>{% for note in item.notes %}{% if note.category_name == "Center Screen" %}{{ note.note }}{% endif %}{% endfor %}</td>
-                <td>{% for note in item.notes %}{% if note.category_name == "Ableton" %}{{ note.note }}{% endif %}{% endfor %}</td>
+                <td>{% for note in item.notes %}{% if note.category_name == "Other" %}{{ note.note }}{% endif %}{% endfor %}</td>
             {% endcase %}
           </tr>
         {% endfor %}

@@ -71,9 +71,9 @@
             {% for note in plan.notes %}
               {% if note.category_name == "Information" %}
                 {% if note.note == "NONE" %}
-                  **PLAN IS UNFINALIZED**
+                  ** PLAN IS UNFINALIZED **
                 {% else %}
-                  **VERSION {{ note.note | upcase }}**
+                  ** INFORMATION {{ note.note | upcase }} **
                 {% endif %}
               {% endif %}
             {% endfor %}

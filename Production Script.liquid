@@ -102,9 +102,10 @@
     <table>
       <thead>
         <tr>
+          <th width="5%">Cues</th>
           <th width="5%">Clock</th>
           <th width="5%">Time</th>
-          <th width="45%" style="text-align: left">Element</th>
+          <th width="40%" style="text-align: left">Element</th>
           <th width="15%">Side Screens</th>
           <th width="15%">Center Screen</th>
           <th width="15%">Other</th>
@@ -115,10 +116,11 @@
           <tr>
             {% case item.item_type %}
               {% when 'Header' %}
-                <td colspan="2" class="header"></td>
+                <td colspan="3" class="header"></td>
                 <td class="header">{{ item.title }}</td>
                 <td colspan="3" class="header"></td>
               {% else %}
+                <td></td>
                 <td>{{item.offset}}</td>
                 <td>{{ item.length }}</td>
                 <td style="text-align: left" class="description">

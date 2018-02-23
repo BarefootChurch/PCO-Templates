@@ -96,7 +96,7 @@
         {% endfor %}
       </small>
       <br>
-      <b>PRODUCTION SCRIPT:{% if plan.plan_title != "" %} {{ plan.plan_title }} - {% endif %} {{ plan.dates }}</b>
+      <b>PRODUCTION SCRIPT: {{ plan.dates }} {% if plan.plan_title != "" %} ({{ plan.plan_title }}) {% endif %}</b>
     </header>
     
     <table>
